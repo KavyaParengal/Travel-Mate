@@ -1,0 +1,147 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Home - Travel Mate
+
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <!-- Banner -->
+
+    <div id="travelCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+
+                <div class="banner">
+
+                    <img src="https://images.unsplash.com/photo-1527838832700-5059252407fa" alt="Travel Banner">
+
+                    <div class="banner-overlay">
+
+                        <h1>Explore the World with Travel Mate</h1>
+
+                        <p>
+                            Discover beautiful destinations, hidden tourist spots,
+                            amazing restaurants, and luxury hotels — all in one place.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="carousel-item">
+
+                <div class="banner">
+
+                    <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b" alt="Tour Packages">
+
+                    <div class="banner-overlay">
+
+                        <h1>Exclusive Tour Packages</h1>
+
+                        <p>
+                            Explore our carefully curated travel packages with hotel stays,
+                            transportation, sightseeing, meals, and unforgettable experiences
+                            at affordable prices.
+                        </p>
+
+                        <a href="{% url 'packages' %}" class="carousel-btn mt-3">View Packages</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#travelCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#travelCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="search-container mt-4">
+
+        <form method="POST">
+
+            {% csrf_token %}
+            
+            <div class="row g-2">
+
+                <div class="col-md-10">
+                    <input type="text" name="search" class="form-control search-box" placeholder="Search destinations...">
+                </div>
+
+                <div class="col-md-2">
+                    <button type="submit" class="btn-login w-100"> Search </button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Destinations -->
+
+    <div class="mt-5">
+
+        <h3 class="section-title mb-4"> Popular Destinations </h3>
+
+        <div class="row">
+
+            {% for destination in destinations %}
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card destination-card">
+
+                    <img src="{{ destination.image.url }}"
+                    alt="{{ destination.name }}">
+
+                    <div class="card-body">
+
+                        <h5>{{ destination.name }}</h5>
+
+                        <a href="{% url 'destination_detail' destination.id %}" class="btn-main">Explore</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+                <div class="col-12">
+                    <p>No destinations available.</p>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,236 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+{{ place.name }}
+
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/tourplace.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <!-- HERO -->
+    <div class="hero">
+        <img src="{{ place.image.url }}" alt="{{ place.name }}">
+
+        <div class="overlay">
+            <h1>{{ place.name }}</h1>
+            <p>{{ place.description }}</p>
+            <a href="{{ place.google_map_link }}" target="_blank" class="btn btn-light mt-2">View on Map</a>
+        </div>
+    </div>
+
+    <!-- SECTION TOGGLES -->
+    <div class="toggle-container mt-3">
+
+        <button id="restaurant-btn" class="btn btn-active" style="width: 180px;" onclick="showSection('restaurants')">
+            Restaurants
+        </button>
+
+        <button id="hotel-btn" class="btn btn-inactive" style="width: 180px;" onclick="showSection('hotels')">
+            Hotels
+        </button>
+
+    </div>
+
+    <!-- RESTAURANTS -->
+    <div id="restaurants-section">
+        
+        <h3 class="section-title mt-5">Restaurants Nearby</h3>
+        
+        <div class="row mt-4">
+            
+            {% for r in restaurants %}
+            
+            <div class="col-md-4 mb-4">
+                
+                <a href="{{ r.google_map_link }}" target="_blank" style="text-decoration:none; color:inherit;">
+                
+                    <div class="restaurant-card">
+
+                        <img src="{{ r.image.url }}" class="restaurant-img">
+
+                        <div class="restaurant-content">
+
+                            <h5 class="restaurant-title">{{ r.name }}</h5>
+
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+
+                                <div>
+                                    <span class="rating">{{ r.rating }}  ⭐ </span>
+
+                                    <span class="text-muted">({{ r.rating_count }} Reviews)</span>
+                                </div>
+
+                                <div class="text-muted fw-semibold">
+                                    ₹ {{ r.price_range }}
+                                </div>
+
+                            </div>
+
+                            <p class="location">📍 {{ r.location }}</p>
+
+                            {% if r.is_open %}
+
+                                <p class="open-status">
+                                    Open • Closes {{ r.closing_time }}
+                                </p>
+
+                            {% else %}
+
+                                <p class="closed-status">
+                                    Closed
+                                </p>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+
+            {% empty %}
+
+                <p>No restaurants found.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- HOTELS -->
+    <div id="hotels-section" style="display:none;">
+
+        <h3 class="section-title mt-5">Hotels Nearby</h3>
+
+        <div class="row mt-4">
+
+            {% for h in hotels %}
+
+                <div class="col-md-4 mb-4">
+
+                    <a href="{{ h.google_map_link }}" target="_blank" style="text-decoration:none; color:inherit;">
+                    
+                    <div class="hotel-card">
+
+                        <img src="{{ h.image.url }}" class="hotel-img">
+
+                        <div class="hotel-content">
+
+                            <h5 class="hotel-title">{{ h.name }}</h5>
+
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+
+                                <div>
+
+                                    <span class="rating">{{ h.rating }} ⭐</span>
+
+                                    <span class="text-muted"> ({{ h.rating_count }} Reviews) </span>
+
+                                </div>
+
+                                <div class="hotel-price">
+
+                                    ₹{{ h.price_per_night }}
+
+                                    <small class="text-muted">/night</small>
+
+                                </div>
+
+                            </div>
+
+                            <p class="hotel-info"> 📍 {{ h.location }} </p>
+
+                            <div class="d-flex gap-2 mb-2">
+
+                                <span class="room-badge"> 👨 {{ h.adults }} Adults </span>
+
+                                <span class="room-badge">  👶 {{ h.children }} Children </span>
+
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-2">
+
+                                <span class="hotel-info"> 🛏️ {{ h.available_rooms }} Rooms </span>
+
+                                <span class="hotel-info"> ⭐ Premium Stay </span>
+
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+
+                                <span class="hotel-info"> Check-In: {{ h.check_in }} </span>
+
+                                <span class="hotel-info">Check-Out:{{ h.check_out }}</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </a>
+
+            </div>
+
+            {% empty %}
+
+                <p>No hotels found.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function showSection(section){
+
+        const restaurants = document.getElementById("restaurants-section");
+        const hotels = document.getElementById("hotels-section");
+
+        const restaurantBtn = document.getElementById("restaurant-btn");
+        const hotelBtn = document.getElementById("hotel-btn");
+
+        if(section === "restaurants"){
+
+            restaurants.style.display = "block";
+            hotels.style.display = "none";
+
+            restaurantBtn.classList.remove("btn-inactive");
+            restaurantBtn.classList.add("btn-active");
+
+            hotelBtn.classList.remove("btn-active");
+            hotelBtn.classList.add("btn-inactive");
+
+        }else{
+
+            restaurants.style.display = "none";
+            hotels.style.display = "block";
+
+            hotelBtn.classList.remove("btn-inactive");
+            hotelBtn.classList.add("btn-active");
+
+            restaurantBtn.classList.remove("btn-active");
+            restaurantBtn.classList.add("btn-inactive");
+        }
+    }
+
+    window.onload = function(){
+        showSection('restaurants');
+    }
+</script>
+{% endblock %}

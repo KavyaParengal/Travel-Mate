@@ -1,0 +1,75 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Home - Travel Mate
+
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+
+    <h3 class="mb-4">Package Bookings</h3>
+
+    <div class="table-responsive">
+
+        <table class="table table-striped table-bordered">
+
+            <thead class="table-dark">
+
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Full Name</th>
+                    <th>Package</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Adults</th>
+                    <th>Children</th>
+                    <th>Total Amount</th>
+                    <th>Booking Date</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for booking in bookings %}
+
+                <tr>
+
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ booking.user }}</td>
+                    <td>{{ booking.full_name }}</td>
+                    <td>{{ booking.package }}</td>
+                    <td>{{ booking.email }}</td>
+                    <td>{{ booking.phone }}</td>
+                    <td>{{ booking.adults }}</td>
+                    <td>{{ booking.children }}</td>
+                    <td>₹ {{ booking.total_amount }}</td>
+                    <td>{{ booking.booking_date }}</td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="9" class="text-center">
+                        No bookings found.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

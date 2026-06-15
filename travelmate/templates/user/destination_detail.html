@@ -1,0 +1,89 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+{{ destination.name }}
+
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/destination.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container py-4">
+
+        <!-- ===== HERO ===== -->
+        <div class="hero-section">
+
+            <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
+
+            <div class="hero-overlay">
+
+                <h1>{{ destination.name }}</h1>
+
+                <p>{{ destination.description }}</p>
+
+            </div>
+
+        </div>
+
+        <!-- ===== TOURIST PLACES ===== -->
+        <h2 class="section-title">Tourist Places</h2>
+
+        <div class="row mt-3">
+
+            {% for place in tourist_places %}
+
+            <div class="col-md-3 mb-4">
+
+                <a href="{% url 'place_detail' place.id %}">
+
+                    <div class="place-card">
+
+                        <img src="{{ place.image.url }}" alt="{{ place.name }}">
+
+                        <div class="place-body">
+
+                            <div class="place-title">
+                                {{ place.name }}
+                            </div>
+
+                            <div class="place-desc">
+                                {{ place.description|truncatechars:80 }}
+                            </div>
+
+                            <div class="rating">
+                                 {{ place.rating }} ⭐ ({{ place.rating_count }})
+                            </div>
+
+                            <a href="{{ place.google_map_link }}" target="_blank">
+                                <div class="place-location">
+                                    📍 {{ place.location }}, {{ destination.name }}
+                                </div>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+                <p>No tourist places found for this destination.</p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+{% endblock %}

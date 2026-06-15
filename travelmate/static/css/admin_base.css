@@ -1,0 +1,92 @@
+body{
+    background:#eef7fb;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* NAVBAR */
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:1000;
+    background:white;
+    box-shadow:0 2px 15px rgba(0,0,0,0.08);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#ff4da6;
+    text-decoration:none;
+}
+
+/* BUTTON */
+.btn-main{
+    display:inline-block;
+    background:linear-gradient(to right,#ff6ba8,#8b5cf6);
+    color:white;
+    text-decoration:none;
+    padding:12px 25px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+/* SIDEBAR */
+.sidebar{
+    position:fixed;
+    top:70px;
+    left:0;
+    width:250px;
+    height:100vh;
+    background:linear-gradient(to top,#ff6ba8,#8b5cf6);
+    padding:20px;
+}
+
+.sidebar-menu{
+    list-style:none;
+    padding:0;
+}
+
+.sidebar-menu li{
+    margin-bottom:10px;
+}
+
+.sidebar-menu a,
+.menu-btn{
+    display:block;
+    width:100%;
+    background:none;
+    border:none;
+    color:white;
+    text-decoration:none;
+    text-align:left;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.sidebar-menu a:hover,
+.menu-btn:hover{
+    font-weight:bold;
+}
+
+.submenu{
+    list-style:none;
+    padding-left:20px;
+    margin-top:5px;
+}
+
+.submenu li{
+    margin-bottom:5px;
+}
+
+.submenu a{
+    font-size:14px;
+    color:#d1d5db;
+}
+
+.main-content{
+    margin-left: 270px;
+    margin-top: 90px;
+    padding: 25px;
+}

@@ -1,0 +1,89 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Home - Travel Mate
+
+{% endblock %}
+
+{% block extra_css %}
+   <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+
+    <div class="dashboard-banner">
+
+        <div class="overlay">
+
+            <h1>Welcome to Travel Mate Admin Panel</h1>
+
+            <p>
+                Manage destinations, packages, bookings, hotels,
+                restaurants, and user activities from a single platform.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="about-section mt-5">
+
+        <h3>About Travel Mate</h3>
+
+        <p>
+            Travel Mate is a travel management platform designed to help
+            travelers discover destinations, explore tour packages,
+            find hotels and restaurants, and make hassle-free bookings.
+        </p>
+
+        <p>
+            As an administrator, you can manage all travel-related content,
+            monitor user activities, and keep the platform updated with
+            the latest destinations and packages.
+        </p>
+
+    </div>
+
+    <div class="feature-section mt-4">
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+                    <h4>🌍 Destinations</h4>
+                    <p>Add and manage tourist destinations.</p>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+                    <h4>🎒 Packages</h4>
+                    <p>Create and update travel packages.</p>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+                    <h4>📅 Bookings</h4>
+                    <p>Monitor and manage customer bookings.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

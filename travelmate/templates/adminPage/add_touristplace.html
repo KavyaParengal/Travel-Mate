@@ -1,0 +1,189 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Add Tourist Place
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+
+    <div class="container mt-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="contact-box">
+
+                    <h3 class="section-title mb-4">
+                        Add Tourist Place
+                    </h3>
+
+                    <form method="POST"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <!-- Destination -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Destination
+                            </label>
+
+                            <select name="destination"
+                                    class="form-select"
+                                    required>
+
+                                <option value="">
+                                    Select Destination
+                                </option>
+
+                                {% for destination in destinations %}
+
+                                <option value="{{ destination.id }}">
+                                    {{ destination.name }}
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                        <!-- Place Name -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Tourist Place Name
+                            </label>
+
+                            <input type="text"
+                                   name="name"
+                                   class="form-control"
+                                   placeholder="Enter tourist place name"
+                                   required>
+
+                        </div>
+
+                        <!-- Image -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Place Image
+                            </label>
+
+                            <input type="file"
+                                   name="image"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+                        <!-- Description -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Description
+                            </label>
+
+                            <textarea name="description"
+                                      rows="5"
+                                      class="form-control"
+                                      placeholder="Enter description"
+                                      required></textarea>
+
+                        </div>
+
+                        <!-- Location -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Location
+                            </label>
+
+                            <input type="text"
+                                   name="location"
+                                   class="form-control"
+                                   placeholder="Enter location">
+
+                        </div>
+
+                        <!-- Google Map -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Google Map Link
+                            </label>
+
+                            <input type="url"
+                                   name="google_map_link"
+                                   class="form-control"
+                                   placeholder="https://maps.google.com/..."
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Rating
+                            </label>
+
+                            <input type="number"
+                                name="rating"
+                                class="form-control"
+                                min="0"
+                                max="5"
+                                step="0.1"
+                                placeholder="Example: 4.5"
+                                required>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Rating Count
+                            </label>
+
+                            <input type="number"
+                                name="rating_count"
+                                class="form-control"
+                                min="0"
+                                placeholder="Example: 120"
+                                required>
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn-main">
+                            Add Tourist Place
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

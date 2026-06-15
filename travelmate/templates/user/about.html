@@ -1,0 +1,128 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+About - Travel Mate
+
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <!-- HERO -->
+        <div class="hero">
+
+            <img src="https://images.unsplash.com/photo-1527838832700-5059252407fa">
+
+            <div class="overlay">
+
+                <h1>About Travel Mate</h1>
+
+                <p>
+                    Your Smart Travel Companion for Discovering Amazing Destinations
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ABOUT -->
+        <div class="section-box">
+
+            <h2 class="section-title">Who We Are</h2>
+
+            <p>
+                Travel Mate is a modern travel planning platform designed to help travelers
+                discover destinations, explore tourist attractions, find nearby restaurants,
+                locate comfortable hotels, and plan memorable trips with ease.
+            </p>
+
+            <p>
+                Our mission is to simplify travel planning by providing all essential
+                travel information in one place. From destination discovery to route
+                guidance and accommodation recommendations, Travel Mate makes every journey
+                easier and more enjoyable.
+            </p>
+
+        </div>
+
+        <!-- MISSION -->
+        <div class="section-box">
+
+            <h2 class="section-title">Our Mission</h2>
+
+            <p>
+                To provide travelers with accurate, user-friendly, and intelligent travel
+                recommendations that enhance their travel experience and help them make
+                informed decisions.
+            </p>
+
+        </div>
+
+        <!-- FEATURES -->
+        <h2 class="section-title text-center mt-5">
+            Why Choose Travel Mate?
+        </h2>
+
+        <div class="row mt-4">
+
+            <div class="col-md-4 mb-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🌍</div>
+
+                    <h5>Explore Destinations</h5>
+
+                    <p>
+                        Discover famous tourist places and hidden gems around the world.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 mb-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🍽️</div>
+
+                    <h5>Find Restaurants</h5>
+
+                    <p>
+                        Explore nearby restaurants with ratings, reviews, and directions.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 mb-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🏨</div>
+
+                    <h5>Book Hotels</h5>
+
+                    <p>
+                        Find comfortable accommodation options for every budget.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

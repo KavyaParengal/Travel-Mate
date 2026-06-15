@@ -1,0 +1,171 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Add Package
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+
+    <div class="container mt-1">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="contact-box">
+
+                    <h3 class="section-title mb-4">
+                        Add Travel Package
+                    </h3>
+
+                    <!-- {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %} -->
+
+                    <form method="POST"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Package Title
+                            </label>
+
+                            <input type="text"
+                                   name="title"
+                                   class="form-control"
+                                   placeholder="Enter package title"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Location
+                            </label>
+
+                            <input type="text"
+                                   name="location"
+                                   class="form-control"
+                                   placeholder="Enter location"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Package Image
+                            </label>
+
+                            <input type="file"
+                                   name="image"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Duration
+                            </label>
+
+                            <input type="text"
+                                   name="duration"
+                                   class="form-control"
+                                   placeholder="Example: 5 Days / 4 Nights"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Travel Date
+                            </label>
+
+                            <input type="text"
+                                   name="travel_date"
+                                   class="form-control"
+                                   placeholder="Example: 15 August 2026"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Price
+                            </label>
+
+                            <input type="number"
+                                   step="0.01"
+                                   name="price"
+                                   class="form-control"
+                                   placeholder="Enter package price"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Description
+                            </label>
+
+                            <textarea name="description"
+                                      rows="5"
+                                      class="form-control"
+                                      placeholder="Enter package description"
+                                      required></textarea>
+
+                        </div>
+
+                        <div class="form-check mb-4">
+
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   name="is_recommended"
+                                   id="recommended">
+
+                            <label class="form-check-label"
+                                   for="recommended">
+                                Recommended Package
+                            </label>
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn-main">
+                            Add Package
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

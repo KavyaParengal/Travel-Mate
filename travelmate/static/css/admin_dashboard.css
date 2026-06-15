@@ -1,0 +1,55 @@
+.dashboard-banner{
+    height:350px;
+    border-radius:20px;
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+    ),
+    url('https://images.unsplash.com/photo-1527838832700-5059252407fa');
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.overlay{
+    color:white;
+    padding:20px;
+}
+
+.overlay h1{
+    font-size:3rem;
+    font-weight:bold;
+}
+
+.overlay p{
+    font-size:18px;
+    max-width:700px;
+}
+
+.about-section{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 3px 15px rgba(0,0,0,0.08);
+}
+
+.feature-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 3px 15px rgba(0,0,0,0.08);
+    height:100%;
+}
+
+.feature-card h4{
+    margin-bottom:15px;
+}

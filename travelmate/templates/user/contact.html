@@ -1,0 +1,139 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Contact - Travel Mate
+
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+
+        <img src="https://images.unsplash.com/photo-1527838832700-5059252407fa">
+
+        <div class="overlay">
+
+            <h1>Contact Us</h1>
+
+            <p>
+                We'd love to hear from you
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- CONTACT SECTION -->
+    <div class="row mt-5">
+
+        <!-- FORM -->
+        <div class="col-lg-7 mb-4">
+
+            <div class="contact-box">
+
+                <h3 class="section-title mb-4">
+                    Send us a Message
+                </h3>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               placeholder="Your Name">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="email"
+                               name="email"
+                               class="form-control"
+                               placeholder="Your Email">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text"
+                               name="subject"
+                               class="form-control"
+                               placeholder="Subject">
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea name="message"
+                                  class="form-control"
+                                  placeholder="Your Message"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-main">
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div class="col-lg-5">
+
+            <div class="contact-info">
+
+                <h3 class="section-title mb-4">
+                    Contact Information
+                </h3>
+
+                <p>
+                    📧 support@travelmate.com
+                </p>
+
+                <p>
+                    📞 +91 98765 43210
+                </p>
+
+                <p>
+                    📍 Kochi, Kerala, India
+                </p>
+
+                <hr>
+
+                <h5 class="section-title">
+                    Working Hours
+                </h5>
+
+                <p>
+                    Monday - Friday
+                    <br>
+                    9:00 AM - 6:00 PM
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

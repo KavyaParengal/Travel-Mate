@@ -1,0 +1,167 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+{{ place.name }}
+
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/tourplace.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+
+    <!-- RESTUARANT -->
+    <div id="restaurants-section">
+
+        <h3 class="section-title mb-4">
+            Manage Restuarant
+        </h3>
+
+        <div class="row mb-4">
+
+            <div class="col-md-4">
+
+                <form method="GET">
+
+                    <select name="place"
+                            class="form-select"
+                            onchange="this.form.submit()">
+
+                        <option value="">
+                            All Tourist Places
+                        </option>
+
+                        {% for place in places %}
+
+                        <option value="{{ place.id }}"
+                            {% if selected_place == place.id|stringformat:"s" %}
+                                selected
+                            {% endif %}>
+
+                            {{ place.name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            
+            {% for r in restaurant %}
+            
+            <div class="col-md-4 mb-4">
+                
+                <a href="{{ r.google_map_link }}" target="_blank" style="text-decoration:none; color:inherit;">
+                
+                    <div class="restaurant-card">
+
+                        <img src="{{ r.image.url }}" class="restaurant-img">
+
+                        <div class="restaurant-content">
+
+                            <h5 class="restaurant-title">{{ r.name }}</h5>
+
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+
+                                <div>
+                                    <span class="rating">{{ r.rating }}  ⭐ </span>
+
+                                    <span class="text-muted">({{ r.rating_count }} Reviews)</span>
+                                </div>
+
+                                <div class="text-muted fw-semibold">
+                                    ₹ {{ r.price_range }}
+                                </div>
+
+                            </div>
+
+                            <p class="location">📍 {{ r.location }}</p>
+
+                            {% if r.is_open %}
+
+                                <p class="open-status">
+                                    Open • Closes {{ r.closing_time }}
+                                </p>
+
+                            {% else %}
+
+                                <p class="closed-status">
+                                    Closed
+                                </p>
+
+                            {% endif %}
+
+                            <div class="d-flex justify-content-center gap-2 mt-3">
+
+                                <a href="{% url 'edit_restaurant' r.id %}" class="btn btn-warning">
+                                    Edit
+                                </a>
+
+                                <button class="btn btn-danger" onclick="confirmDelete('{{ r.id }}')">
+                                    Delete
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+
+            {% empty %}
+
+                <p>No restaurants found.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+    function confirmDelete(id){
+
+        if(confirm("Are you sure you want to delete this Restuarant ?")){
+
+            h_id = parseInt(id);
+            window.location.href = "/admin_delete_restuarant/" + h_id + "/";
+
+        }
+
+    }
+</script>
+
+{% endblock %}
+
+
+<div class="d-flex justify-content-center gap-2 mt-3">
+
+                                <a href="{% url 'edit_hotel' h.id %}" class="btn btn-warning">
+                                    Edit
+                                </a>
+
+                                <button class="btn btn-danger" onclick="confirmDelete('{{ h.id }}')">
+                                    Delete
+                                </button>
+
+                            </div>

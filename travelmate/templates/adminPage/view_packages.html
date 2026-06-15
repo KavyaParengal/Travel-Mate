@@ -1,0 +1,121 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Packages - Travel Mate
+
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/package.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <div class="mt-2">
+
+        <h3 class="section-title mb-4">
+            Manage Packages
+        </h3>
+
+        <!-- Packages -->
+        <div class="row">
+
+            {% for package in packages %}
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="package-card">
+
+                    <div class="position-relative">
+
+                        <img src="{{ package.image.url }}"
+                            class="package-img">
+
+                        {% if package.is_recommended %}
+                        <span class="recommended-badge">
+                            Recommended
+                        </span>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="p-3">
+
+                        <small class="text-muted">
+                            {{ package.location }}
+                        </small>
+
+                        <h4 class="package-title mt-2">
+                            {{ package.title }}
+                        </h4>
+
+                        <p class="package-description">
+                            {{ package.description|truncatewords:15 }}
+                        </p>
+
+                        <div class="package-info">
+
+                            <p>📅 {{ package.travel_date }}</p>
+
+                            <p> ⏱ {{ package.duration }}</p>
+
+                        </div>
+
+                        <div class="d-flex align-items-center mt-3">
+                            <h5 class="price mr-2">₹{{ package.price }}</h5>
+                            <small class="text-muted">  /   Person</small>
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-2 mt-3">
+
+                            <a href="{% url 'edit_package' package.id %}" class="btn btn-warning">
+                                Edit
+                            </a>
+
+                            <button class="btn btn-danger" onclick="confirmDelete('{{ package.id }}')">
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+                <div class="col-12">
+                    <p>No packages found.</p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+    <script>
+        function confirmDelete(id){
+
+            if(confirm("Are you sure you want to delete this Package ?")){
+
+                p_id = parseInt(id);
+                window.location.href = "/delete_package/" + p_id + "/";
+
+            }
+
+        }
+    </script>
+
+{% endblock %}

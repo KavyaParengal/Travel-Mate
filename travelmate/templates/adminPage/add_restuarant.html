@@ -1,0 +1,187 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Add Restaurant
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+
+    <div class="container mt-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="contact-box">
+
+                    <h3 class="section-title mb-4">
+                        Add Restaurant
+                    </h3>
+
+                    <form method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Tourist Place</label>
+
+                            <select name="touristplace"
+                                    class="form-select"
+                                    required>
+
+                                <option value="">
+                                    Select Tourist Place
+                                </option>
+
+                                {% for place in places %}
+                                <option value="{{ place.id }}">
+                                    {{ place.name }}
+                                </option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Restaurant Name</label>
+
+                            <input type="text"
+                                   name="name"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Restaurant Image</label>
+
+                            <input type="file"
+                                   name="image"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Rating
+                                </label>
+
+                                <input type="number"
+                                       name="rating"
+                                       min="0"
+                                       max="5"
+                                       step="0.1"
+                                       class="form-control"
+                                       required>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Rating Count
+                                </label>
+
+                                <input type="number"
+                                       name="rating_count"
+                                       class="form-control"
+                                       required>
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Price Range
+                            </label>
+
+                            <input type="text"
+                                   name="price_range"
+                                   class="form-control"
+                                   placeholder="₹500 - ₹1500"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Location
+                            </label>
+
+                            <textarea name="location"
+                                      rows="3"
+                                      class="form-control"
+                                      required></textarea>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Google Map Link
+                            </label>
+
+                            <input type="url"
+                                   name="google_map_link"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3 form-check">
+
+                            <input type="checkbox"
+                                   name="is_open"
+                                   class="form-check-input"
+                                   checked>
+
+                            <label class="form-check-label">
+                                Restaurant Open
+                            </label>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Closing Time
+                            </label>
+
+                            <input type="text"
+                                   name="closing_time"
+                                   class="form-control"
+                                   placeholder="10:00 PM">
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn-main">
+                            Add Restaurant
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

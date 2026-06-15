@@ -1,0 +1,66 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Home - Travel Mate
+
+{% endblock %}
+
+{% block content %}
+<div class="main-content">
+
+    <h3 class="mb-4">Contact Messages</h3>
+
+    <div class="table-responsive">
+
+        <table class="table table-striped table-bordered">
+
+            <thead class="table-dark">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                    <th>Submitted Date</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for contact in contacts %}
+
+                <tr>
+
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.subject }}</td>
+                    <td>{{ contact.message }}</td>
+                    <td>{{ contact.created_at }}</td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="6" class="text-center">
+                        No messages found.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

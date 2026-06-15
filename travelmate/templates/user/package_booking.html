@@ -1,0 +1,180 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/package_booking.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 pt-5">
+
+    <div class="row">
+
+        <!-- Package Details -->
+
+        <div class="col-lg-7">
+
+            <div class="package-card">
+
+                <img src="{{ package.image.url }}" class="package-image">
+
+                <div class="p-4">
+
+                    <h2>{{ package.title }}</h2>
+
+                    <p class="location">📍 {{ package.location }}</p><hr>
+
+                    <h4>Description</h4>
+
+                    <p>{{ package.description }}</p><hr>
+
+                    <!-- <h4>Package Includes</h4>
+
+                    <p>
+                        {{ package.package_includes }}
+                    </p>
+
+                    <hr>
+
+                    <h4>Package Excludes</h4>
+
+                    <p>
+                        {{ package.package_excludes }}
+                    </p> -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Checkout -->
+
+        <div class="col-lg-5">
+
+            <div class="checkout-card">
+
+                <h3>Checkout</h3>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <input type="text"
+                           name="full_name"
+                           placeholder="Full Name"
+                           class="form-control mb-3"
+                           required>
+
+                    <input type="email"
+                           name="email"
+                           placeholder="Email"
+                           class="form-control mb-3"
+                           required>
+
+                    <input type="text"
+                           name="phone"
+                           placeholder="Phone"
+                           class="form-control mb-3"
+                           required>
+
+                    <div class="row">
+
+                        <div class="col-6">
+
+                            <label>Adults</label>
+
+                            <input type="number"
+                                   id="adults"
+                                   name="adults"
+                                   value="1"
+                                   min="1"
+                                   class="form-control"
+                                   onchange="calculateTotal()">
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <label>Children</label>
+
+                            <input type="number"
+                                   id="children"
+                                   name="children"
+                                   value="0"
+                                   min="0"
+                                   class="form-control"
+                                   onchange="calculateTotal()">
+
+                        </div>
+
+                    </div>
+
+                    <input type="hidden"
+                           id="total_amount"
+                           name="total_amount">
+
+                    <hr>
+
+                    <div class="total-box">
+
+                        <span>Total Amount</span>
+
+                        <h3 id="totalPrice">
+                            ₹{{ package.price }}
+                        </h3>
+
+                    </div>
+
+                    <button type="submit"
+                            class="btn-main w-100">
+
+                        Confirm Booking
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+
+    function calculateTotal(){
+
+        let adults =parseInt(document.getElementById( "adults").value ) || 0;
+
+        let children =parseInt(document.getElementById("children").value) || 0;
+
+        let price =parseFloat("{{ package.price }}");
+
+        let total =(adults * price)+(children * price * 0.5);
+
+        document.getElementById("totalPrice" ).innerHTML ="₹" + total.toFixed(2);
+
+        document.getElementById("total_amount").value =total.toFixed(2);
+    }
+
+    window.onload = calculateTotal;
+
+</script>
+
+{% endblock %}

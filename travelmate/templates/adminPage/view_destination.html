@@ -1,0 +1,95 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Home - Travel Mate
+
+{% endblock %}
+
+{% block extra_css %}
+   <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Destinations -->
+
+<div class="main-content">
+    <div class="mt-2">
+
+        <h3 class="section-title mb-4">
+            Manage Destinations
+        </h3>
+
+        <div class="row">
+
+            {% for destination in destinations %}
+
+            <div class="col-md-3 mb-4">
+
+                <div class="card destination-card">
+
+                    <img src="{{ destination.image.url }}"
+                        alt="{{ destination.name }}">
+
+                    <div class="card-body">
+
+                        <h5 class="destination-title">
+                            {{ destination.name }}
+                        </h5>
+
+                        <p class="destination-description">
+                            {{ destination.description|truncatewords:12 }}
+                        </p>
+
+                        <div class="d-flex justify-content-center gap-2 mt-3">
+
+                            <a href="{% url 'edit_destination' destination.id %}" class="btn btn-warning">
+                                Edit
+                            </a>
+
+                            <button class="btn btn-danger" onclick="confirmDelete('{{ destination.id }}')">
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+                <p>No destinations available.</p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+    <script>
+        function confirmDelete(id){
+
+            if(confirm("Are you sure you want to delete this destination?")){
+
+                d_id = parseInt(id);
+                window.location.href = "/delete_destination/" + d_id + "/";
+
+            }
+
+        }
+    </script>
+
+{% endblock %}

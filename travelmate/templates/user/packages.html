@@ -1,0 +1,121 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Packages - Travel Mate
+
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/package.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Hero Banner -->
+
+    <div class="package-banner">
+
+        <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b" alt="Travel Packages">
+
+        <div class="package-banner-overlay">
+
+            <h1>Find Your Next Unforgettable Trip</h1>
+
+            <p>
+                Discover hidden gems, chill spots, and wild adventures,
+                all in one place.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Page Heading -->
+    <div class="text-center mb-5">
+        <h1 class="package-heading">Our Popular Packages</h1>
+
+        <p class="package-subtitle">
+            Discover where everyone's heading this season, from tropical escapes
+            to urban adventures, these trips are stealing the spotlight.
+        </p>
+    </div>
+
+    <!-- Packages -->
+    <div class="row">
+
+        {% for package in packages %}
+
+        <div class="col-lg-3 col-md-6 mb-4">
+
+            <div class="package-card">
+
+                <div class="position-relative">
+
+                    <img src="{{ package.image.url }}"
+                         class="package-img">
+
+                    {% if package.is_recommended %}
+                    <span class="recommended-badge">
+                        Recommended
+                    </span>
+                    {% endif %}
+
+                </div>
+
+                <div class="p-3">
+
+                    <small class="text-muted">
+                        {{ package.location }}
+                    </small>
+
+                    <h4 class="package-title mt-2">
+                        {{ package.title }}
+                    </h4>
+
+                    <p class="package-description">
+                        {{ package.description|truncatewords:15 }}
+                    </p>
+
+                    <div class="package-info">
+
+                        <p>📅 {{ package.travel_date }}</p>
+
+                        <p> ⏱ {{ package.duration }}</p>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+
+                        <div>
+                            <h5 class="price">₹{{ package.price }}</h5>
+                            <small class="text-muted">/ Person</small>
+                        </div>
+
+                        <a href="{% url 'package_booking' package.id %}" class="btn-book"> Book Now </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+            <div class="col-12">
+                <p>No packages found.</p>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,294 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Edit Hotel
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+
+    <div class="container mt-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="contact-box">
+
+                    <h3 class="section-title mb-4">
+                        Edit Hotel
+                    </h3>
+
+                    <form method="POST"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <!-- Tourist Place -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Tourist Place
+                            </label>
+
+                            <select name="touristplace"
+                                    class="form-select"
+                                    required>
+
+                                {% for place in places %}
+
+                                <option value="{{ place.id }}"
+                                    {% if hotel.touristplace.id == place.id %}
+                                        selected
+                                    {% endif %}>
+
+                                    {{ place.name }}
+
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                        <!-- Hotel Name -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Hotel Name
+                            </label>
+
+                            <input type="text"
+                                   name="name"
+                                   class="form-control"
+                                   value="{{ hotel.name }}"
+                                   required>
+
+                        </div>
+
+                        <!-- Current Image -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Current Image
+                            </label>
+
+                            <br>
+
+                            <img src="{{ hotel.image.url }}"
+                                 width="150"
+                                 class="rounded">
+
+                        </div>
+
+                        <!-- New Image -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Change Image
+                            </label>
+
+                            <input type="file"
+                                   name="image"
+                                   class="form-control">
+
+                        </div>
+
+                        <!-- Location -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Location
+                            </label>
+
+                            <textarea name="location"
+                                      rows="3"
+                                      class="form-control"
+                                      required>{{ hotel.location }}</textarea>
+
+                        </div>
+
+                        <!-- Google Map -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Google Map Link
+                            </label>
+
+                            <input type="url"
+                                   name="google_map_link"
+                                   class="form-control"
+                                   value="{{ hotel.google_map_link }}"
+                                   required>
+
+                        </div>
+
+                        <!-- Rating -->
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Rating
+                                </label>
+
+                                <input type="number"
+                                       name="rating"
+                                       class="form-control"
+                                       value="{{ hotel.rating }}"
+                                       min="0"
+                                       max="5"
+                                       step="0.1"
+                                       required>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Rating Count
+                                </label>
+
+                                <input type="number"
+                                       name="rating_count"
+                                       class="form-control"
+                                       value="{{ hotel.rating_count }}"
+                                       min="0"
+                                       required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Price -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Price Per Night
+                            </label>
+
+                            <input type="number"
+                                   name="price_per_night"
+                                   class="form-control"
+                                   value="{{ hotel.price_per_night }}"
+                                   step="0.01"
+                                   required>
+
+                        </div>
+
+                        <!-- Adults & Children -->
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Adults
+                                </label>
+
+                                <input type="number"
+                                       name="adults"
+                                       class="form-control"
+                                       value="{{ hotel.adults }}">
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Children
+                                </label>
+
+                                <input type="number"
+                                       name="children"
+                                       class="form-control"
+                                       value="{{ hotel.children }}">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Available Rooms -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Available Rooms
+                            </label>
+
+                            <input type="number"
+                                   name="available_rooms"
+                                   class="form-control"
+                                   value="{{ hotel.available_rooms }}"
+                                   required>
+
+                        </div>
+
+                        <!-- Check In / Check Out -->
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Check In
+                                </label>
+
+                                <input type="text"
+                                       name="check_in"
+                                       class="form-control"
+                                       value="{{ hotel.check_in }}"
+                                       required>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Check Out
+                                </label>
+
+                                <input type="text"
+                                       name="check_out"
+                                       class="form-control"
+                                       value="{{ hotel.check_out }}"
+                                       required>
+
+                            </div>
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn-main">
+                            Update Hotel
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

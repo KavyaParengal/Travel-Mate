@@ -1,0 +1,281 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Add Hotel
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+
+    <div class="container mt-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="contact-box">
+
+                    <h3 class="section-title mb-4">
+                        Add Hotel
+                    </h3>
+
+                    <form method="POST"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <!-- Tourist Place -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Tourist Place
+                            </label>
+
+                            <select name="touristplace"
+                                    class="form-select"
+                                    required>
+
+                                <option value="">
+                                    Select Tourist Place
+                                </option>
+
+                                {% for place in places %}
+
+                                <option value="{{ place.id }}">
+                                    {{ place.name }}
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                        <!-- Hotel Name -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Hotel Name
+                            </label>
+
+                            <input type="text"
+                                   name="name"
+                                   class="form-control"
+                                   placeholder="Enter Hotel Name"
+                                   required>
+
+                        </div>
+
+                        <!-- Hotel Image -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Hotel Image
+                            </label>
+
+                            <input type="file"
+                                   name="image"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+                        <!-- Location -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Location
+                            </label>
+
+                            <textarea name="location"
+                                      rows="3"
+                                      class="form-control"
+                                      placeholder="Enter Hotel Location"
+                                      required></textarea>
+
+                        </div>
+
+                        <!-- Google Map -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Google Map Link
+                            </label>
+
+                            <input type="url"
+                                   name="google_map_link"
+                                   class="form-control"
+                                   placeholder="https://maps.google.com/"
+                                   required>
+
+                        </div>
+
+                        <!-- Rating -->
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Rating
+                                </label>
+
+                                <input type="number"
+                                       name="rating"
+                                       class="form-control"
+                                       min="0"
+                                       max="5"
+                                       step="0.1"
+                                       placeholder="4.5"
+                                       required>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Rating Count
+                                </label>
+
+                                <input type="number"
+                                       name="rating_count"
+                                       class="form-control"
+                                       min="0"
+                                       placeholder="250"
+                                       required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Price -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Price Per Night
+                            </label>
+
+                            <input type="number"
+                                   name="price_per_night"
+                                   class="form-control"
+                                   step="0.01"
+                                   placeholder="2500"
+                                   required>
+
+                        </div>
+
+                        <!-- Adults & Children -->
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Adults
+                                </label>
+
+                                <input type="number"
+                                       name="adults"
+                                       class="form-control"
+                                       value="2"
+                                       min="1">
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Children
+                                </label>
+
+                                <input type="number"
+                                       name="children"
+                                       class="form-control"
+                                       value="0"
+                                       min="0">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Rooms -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Available Rooms
+                            </label>
+
+                            <input type="number"
+                                   name="available_rooms"
+                                   class="form-control"
+                                   value="1"
+                                   min="1">
+
+                        </div>
+
+                        <!-- Check In / Check Out -->
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Check In Time
+                                </label>
+
+                                <input type="text"
+                                       name="check_in"
+                                       class="form-control"
+                                       placeholder="02:00 PM"
+                                       required>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Check Out Time
+                                </label>
+
+                                <input type="text"
+                                       name="check_out"
+                                       class="form-control"
+                                       placeholder="11:00 AM"
+                                       required>
+
+                            </div>
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn-main">
+                            Add Hotel
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

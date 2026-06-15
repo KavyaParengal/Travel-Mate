@@ -1,0 +1,213 @@
+{% extends 'adminPage/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Edit Tourist Place
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+
+    <div class="container mt-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="contact-box">
+
+                    <h3 class="section-title mb-4">
+                        Edit Tourist Place
+                    </h3>
+
+                    <form method="POST"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <!-- Destination -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Destination
+                            </label>
+
+                            <select name="destination"
+                                    class="form-select"
+                                    required>
+
+                                {% for destination in destinations %}
+
+                                <option value="{{ destination.id }}"
+                                    {% if destination.id == place.destination.id %}
+                                        selected
+                                    {% endif %}>
+
+                                    {{ destination.name }}
+
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                        <!-- Tourist Place Name -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Tourist Place Name
+                            </label>
+
+                            <input type="text"
+                                   name="name"
+                                   value="{{ place.name }}"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+                        <!-- Current Image -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Current Image
+                            </label>
+
+                            <br>
+
+                            <img src="{{ place.image.url }}"
+                                 alt="{{ place.name }}"
+                                 class="img-thumbnail mb-3"
+                                 width="250">
+
+                        </div>
+
+                        <!-- Change Image -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Change Image
+                            </label>
+
+                            <input type="file"
+                                   name="image"
+                                   class="form-control">
+
+                        </div>
+
+                        <!-- Description -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Description
+                            </label>
+
+                            <textarea name="description"
+                                      rows="5"
+                                      class="form-control"
+                                      required>{{ place.description }}</textarea>
+
+                        </div>
+
+                        <!-- Location -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Location
+                            </label>
+
+                            <input type="text"
+                                   name="location"
+                                   value="{{ place.location }}"
+                                   class="form-control">
+
+                        </div>
+
+                        <!-- Google Map Link -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Google Map Link
+                            </label>
+
+                            <input type="url"
+                                   name="google_map_link"
+                                   value="{{ place.google_map_link }}"
+                                   class="form-control"
+                                   required>
+
+                        </div>
+
+                        <!-- Rating & Rating Count -->
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Rating
+                                </label>
+
+                                <input type="number"
+                                       name="rating"
+                                       value="{{ place.rating }}"
+                                       class="form-control"
+                                       min="0"
+                                       max="5"
+                                       step="0.1"
+                                       required>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Rating Count
+                                </label>
+
+                                <input type="number"
+                                       name="rating_count"
+                                       value="{{ place.rating_count }}"
+                                       class="form-control"
+                                       min="0"
+                                       required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Submit Button -->
+
+                        <button type="submit"
+                                class="btn-main">
+                            Update Tourist Place
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
